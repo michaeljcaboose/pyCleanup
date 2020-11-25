@@ -1,12 +1,7 @@
 import sys
 from pathlib import Path
-import shutil
 import os
 import re
-
-
-def print_hi(name):
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
 
 def remove_year(folder_name):
@@ -66,15 +61,16 @@ def clean_folder_names(dir_path, folders):
         rename_folder(dir_path, folder, new_name)
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print('Usage: python ')
-    locationToClean = Path(r'F:\Movies')
+        print('Usage: python nameCleanup.py [folder path to clean]')
+        sys.exit()
+
+    folder_path = sys.argv[1]
+    locationToClean = Path(folder_path)
     if locationToClean.exists():
         filesInFolder = os.listdir(locationToClean)
         clean_folder_names(locationToClean, filesInFolder)
     else:
-        print_hi('non-existent path')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        print('non-existent path, please re-run with valid path')
+        sys.exit()
